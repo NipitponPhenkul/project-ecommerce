@@ -1,6 +1,6 @@
 <template>
     <TransitionRoot appear :show="show" as="template">
-      <Dialog as="div" @close="closeModal" class="relative z-10">
+      <Dialog as="div" @close="show = false" class="relative z-10">
         <TransitionChild
           as="template"
           enter="duration-300 ease-out"
@@ -36,7 +36,7 @@
                     {{  product.id ? `Update product: "${props.product.title}"` : 'Create new Product' }}
                   </DialogTitle>
                   <button
-                  @click="closeModal()"
+                  @click="closeModal"
                   class="w-8 h-8 flex items-center justify-center rounded-full transition-colors cursor-pointer hover:bg-[rgba(0,0,0,0.2)]"
                   >
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" 
@@ -124,7 +124,7 @@ import CustomInput from '../../components/core/CustomInput.vue';
       description: props.product.description,
       price: props.product.price,
     }
-  }),
+  })
   
   function closeModal() {
     show.value = false

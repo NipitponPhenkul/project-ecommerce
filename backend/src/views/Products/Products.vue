@@ -10,25 +10,40 @@
             Add new Product
         </button>
     </div>
-    <ProductsModal v-model="showModal" :product="productModel" />
-    <ProductsTable />
+    <ProductsModal v-model="showModal" :product="productModel" @close="onModalClose" />
+    <ProductsTable @clickEdit="editProduct"/>
 </template>
 <script setup>
 import ProductsTable from './ProductsTable.vue';
 import ProductsModal from './ProductsModal.vue';
 import { ref } from 'vue';
+import store from '../../store';
 
-const showModal = ref(false)
-const productModel = ref({
+const DEFAULT_EMPTY_OBJECT = {
     id: '',
     title: '',
     image: '',
     description: '',
     price: '',
-})
+}
+
+const showModal = ref(false)
+const productModel = ref({...DEFAULT_EMPTY_OBJECT})
 
 function showProductModal() {
     showModal.value = true
+}
+
+function editProduct(product) {
+    store.dispatch('getProduct', product.id)
+        .then(({data}) => {
+            productModel.value = data
+            showProductModal()
+        })
+}
+
+function onModalClose() {
+    productModel.value = {...DEFAULT_EMPTY_OBJECT}
 }
 </script>
 <style lang="">

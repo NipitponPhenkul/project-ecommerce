@@ -44,6 +44,10 @@ export function getProducts({commit}, {url = null, search = '', perPage = 10, so
         })
 }
 
+export function getProduct({}, id) {
+    return axiosClient.get(`/products/${id}`)
+}
+
 export function createProduct({commit}, product) {
     if (product.image instanceof File) {
         const form = new FormData();
