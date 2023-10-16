@@ -82,7 +82,7 @@ class CartController extends Controller
             $cartItems = json_decode($request->cookie('cart_items', '[]'), true);
             foreach ($cartItems as $i => &$item) {
                 if ($item['product_id'] === $product->id) {
-                    array_slice($cartItems, $i, 1);
+                    array_splice($cartItems, $i, 1);
                     break;
                 }
             }
