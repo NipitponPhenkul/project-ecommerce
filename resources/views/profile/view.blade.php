@@ -1,17 +1,12 @@
 <x-app-layout>
     <div x-data="{
-            flashMessage: '{{\Illuminate\Support\Facades\Session::get('flash_message')}}',
-            init() {
-                if (this.flashMessage) {
-                    setTimeout(() => this.$dispatch('notify', {message: this.flashMessage}), 200)
-                }
+        flashMessage: '{{\Illuminate\Support\Facades\Session::get('flash_message')}}',
+        init() {
+            if (this.flashMessage) {
+                setTimeout(() => this.$dispatch('notify', {message: this.flashMessage}), 200)
             }
-        }" class="container mx-auto lg:w-2/3 p-5">
-        @if (session('error'))
-            <div class="py-2 px-3 bg-red-500 text-white mb-2 rounded">
-                {{ session('error') }}
-            </div>
-        @endif
+        }
+    }" class="container mx-auto lg:w-2/3 p-5">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
             <div class="bg-white p-3 shadow rounded-lg md:col-span-2">
                 <form x-data="{
@@ -46,18 +41,18 @@
                         }
                         return null;
                     }
-                }" action="{{ route('profile.update') }}" method="post">
+                }" action="" method="post">
                     @csrf
                     <h2 class="text-xl font-semibold mb-2">Profile Details</h2>
                     <div class="grid grid-cols-2 gap-3 mb-3">
-                        <x-input
+                        <x-input 
                             type="text"
                             name="first_name"
                             value="{{old('first_name', $customer->first_name)}}"
                             placeholder="First Name"
                             class="w-full focus:border-purple-600 focus:ring-purple-600 border-gray-300 rounded"
                         />
-                        <x-input
+                        <x-input 
                             type="text"
                             name="last_name"
                             value="{{old('last_name', $customer->last_name)}}"
@@ -83,7 +78,6 @@
                             class="w-full focus:border-purple-600 focus:ring-purple-600 border-gray-300 rounded"
                         />
                     </div>
-
                     <h2 class="text-xl mt-6 font-semibold mb-2">Billing Address</h2>
                     <div class="grid grid-cols-2 gap-3 mb-3">
                         <div>
@@ -97,12 +91,12 @@
                         </div>
                         <div>
                             <x-input
-                                type="text"
-                                name="billing[address2]"
-                                x-model="billingAddress.address2"
-                                placeholder="Address 2"
-                                class="w-full focus:border-purple-600 focus:ring-purple-600 border-gray-300 rounded"
-                            />
+                            type="text"
+                            name="billing[address2]"
+                            x-model="billingAddress.address2"
+                            placeholder="Address 2"
+                            class="w-full focus:border-purple-600 focus:ring-purple-600 border-gray-300 rounded"
+                        />
                         </div>
                     </div>
                     <div class="grid grid-cols-2 gap-3 mb-3">
@@ -250,39 +244,7 @@
                             </template>
                         </div>
                     </div>
-
                     <x-button class="w-full">Update</x-button>
-                </form>
-            </div>
-            <div class="bg-white p-3 shadow rounded-lg">
-                <form action="{{route('profile_password.update')}}" method="post">
-                    @csrf
-                    <h2 class="text-xl font-semibold mb-2">Update Password</h2>
-                    <div class="mb-3">
-                        <x-input
-                            type="password"
-                            name="old_password"
-                            placeholder="Your Current Password"
-                            class="w-full focus:border-purple-600 focus:ring-purple-600 border-gray-300 rounded"
-                        />
-                    </div>
-                    <div class="mb-3">
-                        <x-input
-                            type="password"
-                            name="new_password"
-                            placeholder="New Password"
-                            class="w-full focus:border-purple-600 focus:ring-purple-600 border-gray-300 rounded"
-                        />
-                    </div>
-                    <div class="mb-3">
-                        <x-input
-                            type="password"
-                            name="new_password_confirmation"
-                            placeholder="Repeat New Password"
-                            class="w-full focus:border-purple-600 focus:ring-purple-600 border-gray-300 rounded"
-                        />
-                    </div>
-                    <x-button>Update</x-button>
                 </form>
             </div>
         </div>
