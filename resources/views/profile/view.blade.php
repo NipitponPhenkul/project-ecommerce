@@ -41,7 +41,7 @@
                         }
                         return null;
                     }
-                }" action="" method="post">
+                }" action="{{ route('profile.update') }}" method="post">
                     @csrf
                     <h2 class="text-xl font-semibold mb-2">Profile Details</h2>
                     <div class="grid grid-cols-2 gap-3 mb-3">
@@ -245,6 +245,38 @@
                         </div>
                     </div>
                     <x-button class="w-full">Update</x-button>
+                </form>
+            </div>
+            <div class="bg-white p-3 shadow rounded-lg">
+                <form action="{{route('profile_password.update')}}" method="post">
+                    @csrf
+                    <h2 class="text-xl font-semibold mb-2">Update Password</h2>
+                    <div class="mb-3">
+                        <x-input
+                            type="password"
+                            name="old_password"
+                            placeholder="Your Current Password"
+                            class="w-full focus:border-purple-600 focus:ring-purple-600 border-gray-300 rounded"
+                        />
+                    </div>
+                    <div class="mb-3">
+                        <x-input
+                            type="password"
+                            name="new_password"
+                            placeholder="New Password"
+                            class="w-full focus:border-purple-600 focus:ring-purple-600 border-gray-300 rounded"
+                        />
+                    </div>
+                    <div class="mb-3">
+                        <x-input
+                            type="password"
+                            name="new_password_confirmation"
+                            placeholder="Repeat New Password"
+                            class="w-full focus:border-purple-600 focus:ring-purple-600 border-gray-300 rounded"
+                        />
+                    </div>
+                    <x-button>Update</x-button>
+
                 </form>
             </div>
         </div>
